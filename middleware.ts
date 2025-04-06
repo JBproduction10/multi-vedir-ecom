@@ -1,5 +1,5 @@
 import { clerkMiddleware, createRouteMatcher } from "@clerk/nextjs/server";
-import { NextResponse } from "next/server";
+// import { NextResponse } from "next/server";
 // import { geolocation } from "@vercel/functions";
 // import countries from "@/data/countries.json";
 // import { Country } from "./lib/types";
@@ -16,11 +16,11 @@ export default clerkMiddleware(async (auth, req, next) => {
     await auth.protect();
   }
   // Creating a basic response
-  let response = NextResponse.next();
+  // let response = NextResponse.next();
 
   /*---------Handle Country detection----------*/
   // Step 1: Check if country is already set in cookies
-  const countryCookie = req.cookies.get("userCountry");
+  // const countryCookie = req.cookies.get("userCountry");
 
   // const DEFAULT_COUNTRY: Country = {
   //   name: "United States",
@@ -29,10 +29,10 @@ export default clerkMiddleware(async (auth, req, next) => {
   //   region: "",
   // };
 
-  if (countryCookie) {
-    // If the user has already selected a country, use that for subsequent requests
-    response = NextResponse.next();
-  } else {
+  // if (countryCookie) {
+  //   // If the user has already selected a country, use that for subsequent requests
+  //   response = NextResponse.next();
+  // } else {
     // Step 2: Get the user country using the helper function
     // const geo = geolocation(req);
     // let userCountry = {
@@ -43,14 +43,14 @@ export default clerkMiddleware(async (auth, req, next) => {
     //   city: geo.city || DEFAULT_COUNTRY.city,
     //   region: geo.region || DEFAULT_COUNTRY.region,
     // };
-    response.cookies.set("userCountry", JSON.stringify(userCountry), {
-      httpOnly: true,
-      secure: process.env.NODE_ENV === "production",
-      sameSite: "lax",
-    });
-  }
+  //   response.cookies.set("userCountry", JSON.stringify(userCountry), {
+  //     httpOnly: true,
+  //     secure: process.env.NODE_ENV === "production",
+  //     sameSite: "lax",
+  //   });
+  // }
 
-  return response;
+  // return response;
 });
 
 export const config = {
